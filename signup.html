@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Sign Up</h2>
+    <form id="signupForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile Number</label>
+        <input type="tel" class="form-control" id="mobile" required>
+      </div>
+      <div class="mb-3">
+        <button type="button" class="btn btn-primary" onclick="sendOTP()">Send OTP</button>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" required>
+      </div>
+      <button type="submit" class="btn btn-success">Sign Up</button>
+    </form>
+  </div>
+
+  <!-- OTP Verification Modal -->
+  <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="otpModalLabel">OTP Verification</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="otpForm">
+            <div class="form-group">
+              <label for="otpCode" class="form-label">Enter OTP</label>
+              <input type="text" class="form-control" id="otpCode" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Verify OTP</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Custom JS -->
+  <script>
+    function sendOTP() {
+      // Show the OTP modal when "Send OTP" button is clicked
+      $('#otpModal').modal('show');
+    }
+
+    document.getElementById('otpForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      // Get the entered OTP
+      const otpCode = document.getElementById('otpCode').value;
+      // Validate the OTP (You can add your own validation logic here)
+      if (otpCode === '1234') {
+        alert('OTP Verified');
+        // Close the OTP modal
+        $('#otpModal').modal('hide');
+        // Optionally, proceed with the signup process or other logic
+        document.getElementById('signupForm').submit();
+      } else {
+        alert('Invalid OTP');
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const mobile = document.getElementById('mobile').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+
+      // Save user credentials to local storage
+      const user = {
+        name: name,
+        email: email,
+        mobile: mobile,
+        password: password
+      };
+      localStorage.setItem('user', JSON.stringify(user));
+
+      alert('Sign up successful! Redirecting to login page...');
+      
+      // Redirect to login page after successful signup
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>

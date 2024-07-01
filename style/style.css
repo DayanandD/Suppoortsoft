@@ -1,0 +1,38 @@
+/* styles.css */
+
+/* Add custom styles here */
+body {
+    background: #f8f9fa;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .card-title {
+    font-weight: 700;
+  }
+  
+  .card-text {
+    color: #6c757d;
+  }
+  
+  .btn-success, .btn-danger {
+    width: 48%;
+    margin-right: 4%;
+  }
+  
+  .btn-success:last-child {
+    margin-right: 0;
+  }
+  
+  /* Add this CSS code to your stylesheet */
+#likedProfilesList {
+    display: none;
+  }
+  
+  #likedProfilesList.show {
+    display: block;
+  }
+  
